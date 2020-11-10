@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root 'pages#home'
   resources :traits, only: [:new, :create]
   resources :schools, only: [:new, :create]
-  get '/finish-profile', to: 'pages#finish_user', as: 'new_traits'
+  get '/finish-profile', to: 'pages#finish_user', as: 'finish_user'
+  get '/athlete/:id', to: 'pages#user_profile', as: 'athlete'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

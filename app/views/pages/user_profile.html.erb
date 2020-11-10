@@ -1,0 +1,7 @@
+<h1>Athlete Profile</h1>
+<p><%= @athlete.name %></p>
+<% unless @athlete.trait.nil? %>
+  <p><%= @athlete.trait.height.to_s + "cm" %></p>
+  <p><%= @athlete.trait.weight.to_s + "kg" %></p>
+  <p><%= @athlete.trait.position %></p>
+<% end %>

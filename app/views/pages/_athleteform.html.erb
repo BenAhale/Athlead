@@ -1,7 +1,7 @@
 <%= form_with(model: trait, local: true) do |form| %>
   <% if trait.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(trait.errors.count, "error") %> prohibited this trait from being saved:</h2>
+      <h2><%= pluralize(trait.errors.count, "error") %> prohibited your changes from being saved:</h2>
 
       <ul>
         <% trait.errors.full_messages.each do |message| %>
@@ -11,22 +11,22 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :height %>
-    <%= form.number_field :height %>
+  <div class="field form-group">
+    <%= form.label :height, "Height (CM)" %>
+    <%= form.number_field :height, max: 250, min: 0, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :weight %>
-    <%= form.number_field :weight %>
+  <div class="field form-group">
+    <%= form.label :weight, "Weight (KG)" %>
+    <%= form.number_field :weight, max: 300, min: 0, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :position %>
-    <%= form.text_field :position %>
+    <%= form.select :position, options_for_select(["Point Guard", "Shooting Guard", "Small Forward", "Power Forward", "Center"]), {}, {:class => "form-control"} %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Save", class: "btn btn-primary" %>
   </div>
 <% end %>
