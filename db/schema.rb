@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_10_031142) do
+ActiveRecord::Schema.define(version: 2020_11_10_034956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,21 @@ ActiveRecord::Schema.define(version: 2020_11_10_031142) do
     t.bigint "user_id", null: false
     t.index ["address_id"], name: "index_schools_on_address_id"
     t.index ["user_id"], name: "index_schools_on_user_id"
+  end
+
+  create_table "statistics", force: :cascade do |t|
+    t.float "points"
+    t.float "rebounds"
+    t.float "assists"
+    t.float "steals"
+    t.float "blocks"
+    t.float "fg_percentage"
+    t.float "three_percentage"
+    t.float "ft_percentage"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_statistics_on_user_id"
   end
 
   create_table "traits", force: :cascade do |t|
@@ -66,6 +81,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_031142) do
 
   add_foreign_key "schools", "addresses"
   add_foreign_key "schools", "users"
+  add_foreign_key "statistics", "users"
   add_foreign_key "traits", "users"
   add_foreign_key "users", "addresses"
 end
