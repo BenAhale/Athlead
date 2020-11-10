@@ -1,0 +1,32 @@
+<%= form_with(model: trait, local: true) do |form| %>
+  <% if trait.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(trait.errors.count, "error") %> prohibited this trait from being saved:</h2>
+
+      <ul>
+        <% trait.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :height %>
+    <%= form.number_field :height %>
+  </div>
+
+  <div class="field">
+    <%= form.label :weight %>
+    <%= form.number_field :weight %>
+  </div>
+
+  <div class="field">
+    <%= form.label :position %>
+    <%= form.text_field :position %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

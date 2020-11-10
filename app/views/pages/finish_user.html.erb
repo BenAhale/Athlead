@@ -1,0 +1,7 @@
+<h1>Finalise your <%= current_user.role.capitalize %> Profile</h1>
+
+<% if current_user.athlete? %>
+  <%= render 'form', trait: @trait %>
+<% elsif current_user.scout? %>
+  <h3>Scout</h3>
+<% end %>

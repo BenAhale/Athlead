@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "users/registrations" }
   root 'pages#home'
-  get '/pages/scouts', to: 'pages#scout', as: 'finish_scout'
-  get '/pages/athletes', to: 'pages#athlete', as: 'finish_athlete'
+  resources :traits, only: [:new, :create]
+  get '/finish-profile', to: 'pages#finish_user', as: 'new_traits'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -2,9 +2,7 @@ class PagesController < ApplicationController
   def home
   end
 
-  def athlete
-  end
-
-  def scout
+  def finish_user
+    @trait = Trait.new
   end
 end
