@@ -11,39 +11,46 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :name, "School Name" %>
-    <%= form.text_field :name %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= form.label :division, "School Division" %>
-    <%= form.number_field :division %>
+    <%= form.number_field :division, class: "form-control" %>
   </div>
 
-  <ul>
     <%= form.fields_for :address do |f| %>
-      <li>
+
+      <div class="field form-group">
         <%= f.label :street %>
-        <%= f.text_field :street %>
- 
+        <%= f.text_field :street, class: "form-control" %>
+      </div>
+
+      <div class="field form-group">
         <%= f.label :city %>
-        <%= f.text_field :city %>
-        
+        <%= f.text_field :city, class: "form-control" %>
+      </div>
+
+      <div class="field form-group">  
         <%= f.label :state %>
-        <%= f.text_field :state %>
+        <%= f.text_field :state, class: "form-control" %>
+      </div>
 
+      <div class="field form-group">
         <%= f.label :postcode %>
-        <%= f.number_field :postcode %>
+        <%= f.number_field :postcode, class: "form-control" %>
+      </div>
 
+      <div class="field form-group">
         <%= f.label :country %>
-        <%= f.text_field :country %>
+        <%= f.text_field :country, class: "form-control" %>
+      </div>
 
-      </li>
     <% end %>
-  </ul>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Save" %>
   </div>
 <% end %>
