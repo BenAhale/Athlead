@@ -1,4 +1,5 @@
 class SchoolsController < ApplicationController
+  skip_before_action :user_finished?
 
   def create
     @school = current_user.build_school(school_params)

@@ -1,4 +1,5 @@
 class TraitsController < ApplicationController
+  skip_before_action :user_finished?
 
   def new
     @trait = Trait.new
