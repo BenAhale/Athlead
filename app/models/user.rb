@@ -1,6 +1,5 @@
 class User < ApplicationRecord
   enum role: [:athlete, :scout]
-  has_one :trait
   belongs_to :address, optional: true
   has_one :school
   has_one :statistic

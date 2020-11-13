@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   def user_finished?
     if current_user
-      if (current_user.athlete? && current_user.trait.nil?) || (current_user.scout? && current_user.school.nil?)
+      if (current_user.athlete? && current_user.statistic.nil?) || (current_user.scout? && current_user.school.nil?)
         redirect_to finish_user_path
       end
     end
