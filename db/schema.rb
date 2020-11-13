@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_10_034956) do
+ActiveRecord::Schema.define(version: 2020_11_13_012613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,17 +37,17 @@ ActiveRecord::Schema.define(version: 2020_11_10_034956) do
   end
 
   create_table "statistics", force: :cascade do |t|
+    t.string "position"
+    t.integer "height"
+    t.integer "weight"
     t.float "points"
     t.float "rebounds"
     t.float "assists"
     t.float "steals"
     t.float "blocks"
-    t.float "fg_percentage"
-    t.float "three_percentage"
-    t.float "ft_percentage"
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_statistics_on_user_id"
   end
 
