@@ -1,0 +1,9 @@
+<div class="user-form">
+  <h1>Finalise your Scout Profile</h1>
+  <br>
+  <% if current_user && (current_user.athlete? && current_user.statistic.nil?) %>
+    <%= render 'shared/statisticform', statistic: @statistic %>
+  <% elsif current_user && (current_user.scout? && current_user.school.nil?) %>
+    <%= render 'shared/schoolform', school: @school %>
+  <% end %>
+</div>

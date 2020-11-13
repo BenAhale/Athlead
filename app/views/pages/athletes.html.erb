@@ -1,0 +1,18 @@
+<h1>All Athletes</h1>
+
+<% @athletes.each do |athlete| %>
+<a href="<%= athlete_path(athlete) %>">
+  <div class="card">
+    <h3><%= athlete.name %></h3>
+    <div class="card-body">
+      <p>Position: <%= athlete.statistic.position %></p>
+      <p>Height: <%= athlete.statistic.height %></p>
+      <p>Weight: <%= athlete.statistic.weight %></p>
+      <p>PPG: <%= athlete.statistic.points %></p>
+      <p>RPG:<%= athlete.statistic.rebounds %></p>
+      <p>APG:<%= athlete.statistic.assists %></p>
+      <p>SPG:<%= athlete.statistic.steals %></p>
+      <p>BPG:<%= athlete.statistic.blocks %></p>
+    </div>
+  </div>
+<% end%>

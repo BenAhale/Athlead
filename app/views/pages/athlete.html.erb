@@ -1,0 +1,12 @@
+<h1>Athlete Profile</h1>
+<p><%= @athlete.name %></p>
+<% unless @athlete.statistic.nil? %>
+  <p><%= @athlete.statistic.height.to_s + "cm" %></p>
+  <p><%= @athlete.statistic.weight.to_s + "kg" %></p>
+  <p><%= @athlete.statistic.position %></p>
+  <p><%= @athlete.statistic.points %></p>
+  <p><%= @athlete.statistic.rebounds %></p>
+  <p><%= @athlete.statistic.assists %></p>
+  <p><%= @athlete.statistic.steals %></p>
+  <p><%= @athlete.statistic.blocks %></p>
+<% end %>
