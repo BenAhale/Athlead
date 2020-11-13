@@ -3,6 +3,7 @@ class User < ApplicationRecord
   belongs_to :address, optional: true
   has_one :school
   has_one :statistic
+  has_one_attached :avatar
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
