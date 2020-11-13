@@ -129,3 +129,16 @@ table th:last-child{
     margin-bottom: 40px;
   }
 }
+
+.videos-container {
+  display: flex;
+  justify-content: space-around;
+}
+.video-card {
+  width: 400px;
+  background-color: #444;
+  border-radius: 20px;
+  iframe {
+    border-radius: 20px;
+  }
+}

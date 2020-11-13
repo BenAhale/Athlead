@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :videos
   resources :statistics
   get 'schools/new'
   get 'schools/create'
