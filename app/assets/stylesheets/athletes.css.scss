@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Text&display=swap');
+
+.athletes-card {
+  background-color: #444;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  height: 130px;
+  display: flex;
+  justify-content: space-between;
+  h3 {
+    display: inline-block;
+  }
+  li {
+    display: inline-block;
+  }
+}
+
+.card-body {
+  padding-right: 0px;
+}
+
+.card-link {
+  color: white;
+}
+
+.card-link:hover {
+  color: white;
+}
+
+.athletes-img {
+  position: absolute;
+  height: 130px;
+  width: 130px;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 130px;
+}
+
+.stat-title {
+  display: block;
+}
+
+.athlete-section {
+  h4 {
+    font-size: 35px;
+    font-weight: 900;
+  }
+  h5 {
+    font-size: 20px;
+  }
+}
+
+.stats {
+  width: 620px;
+  .stat {
+    display: inline-block;
+    padding: 5px;
+    height: 90px;
+    width: 120px;
+    border-left: 0.5px solid darkgray;
+    text-align: center;
+    h6 {
+      margin-top: 10px;
+      font-size: 40px;
+      margin-bottom: 0px;
+      font-family: 'Kanit';
+    }
+    p {
+      text-align: center;
+      margin-top: -7px;
+      font-size: 13px;
+    }
+  }
+
+}
+
+.sml-height {
+  font-size: 17px;
+}

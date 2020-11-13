@@ -1,9 +1,12 @@
 @import 'users';
 @import 'navbar';
 @import 'athlete';
+@import 'athletes';
 
 body {
   background-image: url('Athlete-BG');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .body-background {

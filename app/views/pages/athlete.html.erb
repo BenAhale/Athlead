@@ -22,11 +22,11 @@
     <h3 class="athlete-position"><%= @athlete.statistic.position.upcase %></h3>
     <table class="table table-dark">
       <tr>
-        <th>Points</th>
-        <th>Rebounds</th>
-        <th>Assists</th>
-        <th>Steals</th>
-        <th>Blocks</th>
+        <th>POINTS</th>
+        <th>REBOUNDS</th>
+        <th>ASSISTS</th>
+        <th>STEALS</th>
+        <th>BLOCKS</th>
       </tr>
       <tr>
         <td><%= @athlete.statistic.points %></td>
@@ -36,9 +36,19 @@
         <td><%= @athlete.statistic.blocks %></td>
       </tr>
     </table>
+    <div class="stats-border"></div>
   <% end %>
   <div class="scout-options">
       <button class="btn btn-primary">Message</button>
       <button class="btn btn-info">Offer Scholarship</button>
     </div>
+  <section class="athlete-videos">
+    <h1>Videos & Highlights</h1>
+    <div class="videos-container">
+      <div class="card" style="width: 400px;">
+        <iframe width="100%" height="250" src="https://www.youtube.com/embed/tgbNymZ7vqY"></iframe>
+      </div>
+    </div>
+  </section>
+  <br><br>
 </div>

@@ -98,6 +98,12 @@ table.table-dark {
 .table th {
   border-top: none;
   background-color: #555;
+  font-size: 21px;
+}
+
+.table td {
+  font-family: 'Kanit';
+  font-size: 30px;
 }
 
 table th:first-child{
@@ -106,4 +112,20 @@ table th:first-child{
 
 table th:last-child{
   border-radius:0 10px 0 0;
+}
+
+.stats-border {
+  width: 325px;
+  height: 10px;
+  padding-bottom: 40px;
+  border-bottom: 2px solid #0084ff;
+  margin-bottom: 50px;
+}
+
+.athlete-videos {
+  h1 {
+    color: white;
+    font-size: 40px;
+    margin-bottom: 40px;
+  }
 }

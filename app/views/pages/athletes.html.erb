@@ -1,18 +1,26 @@
-<h1>All Athletes</h1>
-
 <% @athletes.each do |athlete| %>
-<a href="<%= athlete_path(athlete) %>">
-  <div class="card">
-    <h3><%= athlete.name %></h3>
+<a class="card-link" href="<%= athlete_path(athlete) %>">
+  <div class="card athletes-card">
+    <%= image_tag athlete.avatar, class: "athletes-img" %>
     <div class="card-body">
-      <p>Position: <%= athlete.statistic.position %></p>
-      <p>Height: <%= athlete.statistic.height %></p>
-      <p>Weight: <%= athlete.statistic.weight %></p>
-      <p>PPG: <%= athlete.statistic.points %></p>
-      <p>RPG:<%= athlete.statistic.rebounds %></p>
-      <p>APG:<%= athlete.statistic.assists %></p>
-      <p>SPG:<%= athlete.statistic.steals %></p>
-      <p>BPG:<%= athlete.statistic.blocks %></p>
+      <div class="athlete-section">
+        <h4><%= athlete.name %></h5>
+        <h5><%= athlete.statistic.position %> | Class of 2021 </h6>
+      </div>
+      <div class="stats">
+        <div class="stat">
+          <% split_height = ((athlete.statistic.height / 30.48).round(1)).to_s.split(".") %>
+          <h6><%= split_height.first %><span class="sml-height"> ft </span><%= split_height.second %><span class="sml-height"> in</span></h6>
+          <p class="stat-title">HEIGHT</p>
+          </div>
+        <div class="stat">
+          <h6><%= (athlete.statistic.weight * 2.205).to_i.to_s %><span class="sml-height"> lbs</span></h6>
+          <p class="stat-title">WEIGHT</p>
+        </div>
+        <div class="stat"><h6><%= athlete.statistic.points %></h6><p class="stat-title">POINTS</p></div>
+        <div class="stat"><h6><%= athlete.statistic.rebounds %></h6><p class="stat-title">REBOUNDS</p></div>
+        <div class="stat"><h6><%= athlete.statistic.assists %></h6><p class="stat-title">ASSISTS</p></div>
+      </div>
     </div>
   </div>
 <% end%>
