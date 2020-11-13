@@ -10,13 +10,38 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-dark bg-light">
-      <% if user_signed_in? %>
-        <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= link_to 'Sign In', new_user_session_path %>
-        <%= link_to 'Sign Up', new_user_registration_path %>
-      <% end %>
+    <nav class="navbar">
+      <div class="search-bar">
+        <%# <% if current_user.scout? %>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        <%# <% end  %>
+      </div>
+
+      <div class="nav-logo">
+        <a class="navbar-brand" href="<%= root_url %>">
+          <%= image_tag 'Athlead-Black', class: "navbar-logo"%>
+        </a>
+      </div>
+      <div class="account-menu">
+        <div class="nav-item dropdown">
+          <% if user_signed_in? %>
+            <%= image_tag current_user.avatar, class: "nav-avatar" %>
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= current_user.name %>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+          <% else %>
+              <%= link_to 'Sign In', new_user_session_path, class: "dropdown-item" %>
+              <%= link_to 'Sign Up', new_user_registration_path, class: "dropdown-item" %>
+          <% end %>
+        </div>
+      </div>
     </nav>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>

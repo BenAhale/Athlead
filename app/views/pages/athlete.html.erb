@@ -1,12 +1,29 @@
-<h1>Athlete Profile</h1>
-<p><%= @athlete.name %></p>
-<% unless @athlete.statistic.nil? %>
-  <p><%= @athlete.statistic.height.to_s + "cm" %></p>
-  <p><%= @athlete.statistic.weight.to_s + "kg" %></p>
-  <p><%= @athlete.statistic.position %></p>
-  <p><%= @athlete.statistic.points %></p>
-  <p><%= @athlete.statistic.rebounds %></p>
-  <p><%= @athlete.statistic.assists %></p>
-  <p><%= @athlete.statistic.steals %></p>
-  <p><%= @athlete.statistic.blocks %></p>
-<% end %>
+<div class="profile-container">
+  <div class="profile-name">
+    <% athlete_name = @athlete.name.split %>
+    <h2><%= athlete_name.first %></h2>
+    <h1><%= athlete_name.second %></h1>
+  </div>
+  <%= image_tag @athlete.avatar %>
+  <% unless @athlete.statistic.nil? %>
+    <p><%= @athlete.statistic.height.to_s + "cm" %></p>
+    <p><%= @athlete.statistic.weight.to_s + "kg" %></p>
+    <p><%= @athlete.statistic.position %></p>
+    <table>
+      <tr>
+        <th>Points</th>
+        <th>Rebounds</th>
+        <th>Assists</th>
+        <th>Steals</th>
+        <th>Blocks</th>
+      </tr>
+      <tr>
+        <td><%= @athlete.statistic.points %></td>
+        <td><%= @athlete.statistic.rebounds %></td>
+        <td><%= @athlete.statistic.assists %></td>
+        <td><%= @athlete.statistic.steals %></td>
+        <td><%= @athlete.statistic.blocks %></td>
+      </tr>
+    </table>
+  <% end %>
+</div>
