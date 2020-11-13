@@ -2,19 +2,21 @@ class PagesController < ApplicationController
   skip_before_action :user_finished?, only: [:complete]
 
   def home
+    @athletes = User.athlete
     if current_user.athlete?
-      redirect_to athlete_path(current_user)
+      redirect_to athlete_path(current_athlete)
     elsif current_user.scout?
       render 'athletes'
     end
   end
 
   def athletes
-    @athletes = User.all.map { |user| user if user.athlete? }
+    @athletes = User.athlete
   end
 
   def athlete
     @athlete = User.find(params[:id])
+    @offer = Offer.new
   end
 
   def complete

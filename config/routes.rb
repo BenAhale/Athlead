@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :videos
   resources :statistics
+  resources :offers, only: [:create, :destroy]
   get 'schools/new'
   get 'schools/create'
   devise_for :users, controllers: { registrations: "users/registrations" }

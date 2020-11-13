@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_13_122859) do
+ActiveRecord::Schema.define(version: 2020_11_13_130825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,15 @@ ActiveRecord::Schema.define(version: 2020_11_13_122859) do
     t.string "country"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "offers", force: :cascade do |t|
+    t.bigint "scout_id", null: false
+    t.bigint "athlete_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["athlete_id"], name: "index_offers_on_athlete_id"
+    t.index ["scout_id"], name: "index_offers_on_scout_id"
   end
 
   create_table "schools", force: :cascade do |t|
@@ -99,6 +108,8 @@ ActiveRecord::Schema.define(version: 2020_11_13_122859) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "offers", "users", column: "athlete_id"
+  add_foreign_key "offers", "users", column: "scout_id"
   add_foreign_key "schools", "addresses"
   add_foreign_key "schools", "users"
   add_foreign_key "statistics", "users"

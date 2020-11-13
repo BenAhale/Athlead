@@ -40,7 +40,17 @@
   <% end %>
   <div class="scout-options">
       <button class="btn btn-primary">Message</button>
-      <button class="btn btn-info">Offer Scholarship</button>
+        <% offer_found = false %>
+        <% @athlete.received_offers.each do |offer| %>
+          <% if offer.scout.id == current_user.id %>
+            <% offer_found = true %>
+            <button class="btn btn-warning"><%= link_to 'Delete Offer', offer, method: :delete %></button>
+            <% break %>
+          <% end %>
+        <% end %>
+        <% unless offer_found %>
+          <%= render 'shared/offerform', offer: @offer %>
+        <% end %>
     </div>
   <section class="athlete-videos">
     <h1>Videos & Highlights</h1>
