@@ -1,4 +1,4 @@
-<h1 class="convos-title">Conversations</h1>
+<h1 class="convos-title">Messages</h1>
 <div class="conversation-container">
   <% unless @conversations.empty? %>
     <% if current_user.athlete? %>
@@ -17,8 +17,10 @@
               <div class="col-md-8">
                 <div class="card-body convo-card-body">
                   <h5 class="card-title"><%= conversation.athlete.name %></h5>
-                  <p class="card-text">Preview of the message</p>
-                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                  <% last_msg = conversation.messages.last.content %>
+                  <% last_msg.length > 100 ? msg = ": " + last_msg[0..100] + " ...." : msg = ": " + last_msg %>
+                  <p class="card-text"><%= conversation.messages.last.user.name + msg %></p>
+                  <p class="card-text"><small class="text-muted"><%= time_ago_in_words(conversation.messages.last.created_at) %> ago</small></p>
                 </div>
               </div>
             </div>
