@@ -1,7 +1,11 @@
 <% @athletes.each do |athlete| %>
 <a class="card-link" href="<%= athlete_path(athlete) %>">
   <div class="card athletes-card">
-    <%= image_tag athlete.avatar, class: "athletes-img" %>
+    <% if athlete.avatar.attachment.present? %>
+      <%= image_tag athlete.avatar, class: "athletes-img" %>
+    <% else %>
+      <%= image_tag 'Default-User', class: "athletes-img" %>
+    <% end %>
     <div class="card-body">
       <div class="athlete-section">
         <h4><%= athlete.name %></h5>

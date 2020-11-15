@@ -5,7 +5,11 @@
     <h2><%= athlete_name.first %></h2>
     <h1><%= athlete_name.second %></h1>
   </div>
-  <%= image_tag @athlete.avatar, class: "athlete-img" %>
+  <% if !@athlete.avatar.attachment.nil? %>
+    <%= image_tag @athlete.avatar, class: "athlete-img" %>
+  <% else %>
+    <%= image_tag 'Default-User', class: "athlete-img" %>
+  <% end %>
   <% unless @athlete.statistic.nil? %>
     <div class="athlete-height">
       <h3>HEIGHT</h3>
