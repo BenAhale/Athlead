@@ -10,6 +10,14 @@ class PagesController < ApplicationController
     end
   end
 
+  def conversations
+    if current_user.scout?
+      @conversations = current_user.started_conversations
+    elsif current_user.athlete?
+      @conversations = current_user.conversations
+    end
+  end
+
   def athletes
     @athletes = User.athlete
   end

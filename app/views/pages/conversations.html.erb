@@ -1,0 +1,30 @@
+<h1 class="convos-title">Conversations</h1>
+<div class="conversation-container">
+  <% unless @conversations.empty? %>
+    <% if current_user.athlete? %>
+      <% @conversations.each do |conversation| %>
+        <%= image_tag conversation.scout.avatar %>
+        <h1><%= conversation.scout.name %></h1>
+      <% end %>
+    <% elsif current_user.scout? %>
+      <% @conversations.each do |conversation| %>
+        <a href="<%= conversation_path(conversation) %>" class="conversation-link">
+          <div class="card conversation-card mb-3" style="max-width: 700px;">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <%= image_tag conversation.athlete.avatar, class: "card-img conversations-img" %>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body convo-card-body">
+                  <h5 class="card-title"><%= conversation.athlete.name %></h5>
+                  <p class="card-text">Preview of the message</p>
+                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      <% end%>
+    <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,32 @@
+<div class="conversation">
+  <div class="conversation-header">
+    <% if current_user.scout? %>
+      <%= image_tag @conversation.athlete.avatar %>
+      <a href="<%= athlete_path(@conversation.athlete) %>"><h1><%= @conversation.athlete.name %></h1></a>
+    <% elsif current_user.athlete? %>
+      <%= image_tag @conversation.scout.avatar %>
+      <h1><%= @conversation.scout.name %></h1>
+      <h4><%= @conversation.scout.school.name %> | Divison <%= @conversation.scout.school.division.to_s %></h4>
+    <% end %>
+  </div>
+  <div class="conversation-body">
+    <% if !@conversation.messages.empty? %>
+      <% @conversation.messages.each do |message| %>
+        <% if message.user.id == current_user.id %>
+          <div class="sent-message">
+            <p class="content"><%= message.content %></p>
+          </div>
+        <% else %>
+          <div class="received-message">
+            <p class="content"><%= message.content %></p>
+          </div>
+        <% end %>
+      <% end %>
+    <% else %>
+      <h1>There is nothing here yet! Start the conversation</h1>
+    <% end %>
+  </div>
+  <div class="conversation-message">
+    <%= render 'shared/messageform', message: @message, conversation: @conversation %>
+  </div>
+</div>

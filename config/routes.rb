@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :messages, only: [:show, :new, :create, :destroy]
+  get '/conversations', to: 'pages#conversations', as: 'conversations'
+  resources :conversations, only: [:show, :create, :destroy]
   resources :videos
   resources :statistics
   get '/offers', to: 'pages#offers', as: 'offers'
