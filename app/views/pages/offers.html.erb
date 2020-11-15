@@ -1,0 +1,34 @@
+<div class="card-container">
+  <% if current_user.athlete? %>
+    <% @offers.each do |offer| %>
+      <div class="card offer-card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title"><%= offer.scout.school.name %></h5>
+            <h6 class="card-subtitle mb-2"><%= time_ago_in_words(offer.created_at) %> ago</h6>
+            <p class="card-text">Division: <%= offer.scout.school.division.to_s %></p>
+            <p class="card-text">Scout: <%= offer.scout.name %></p>
+            <button class="btn btn-success"><%= link_to 'Accept', athlete_path(offer.athlete), class: "accept-button" %></button>
+            <button class="btn btn-warning"><%= link_to 'Decline', offer, method: :delete, class: "decline-button" %></button>
+            <a href="#" class="card-link"></a>
+          </div>
+        </div>
+    <% end %>
+  <% elsif current_user.scout? %>
+    <% @offers.each do |offer| %>
+      <a href="<%= athlete_path(offer.athlete) %>" class="card-link">
+        <div class="card offer-card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title"><%= offer.athlete.name %></h5>
+            <h6 class="card-subtitle mb-2"><%= time_ago_in_words(offer.created_at) %> ago</h6>
+            <p class="card-text">Position: <%= offer.athlete.statistic.position %></p>
+            <p class="card-text">Class: <%= %></p>
+            <p class="card-text">Status: <%= %></p>
+            <button class="btn btn-primary"><%= link_to 'View', athlete_path(offer.athlete), class: "view-button" %></button>
+            <button class="btn btn-warning"><%= link_to 'Delete Offer', offer, method: :delete, class: "delete-button" %></button>
+            <a href="#" class="card-link"></a>
+          </div>
+        </div>
+      </a>
+    <% end %>
+  <% end %>
+</div>

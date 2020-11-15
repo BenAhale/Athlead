@@ -36,7 +36,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
+              <%= link_to 'Offers', offers_path %>
               <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           <% else %>
               <%= link_to 'Sign In', new_user_session_path, class: "dropdown-item" %>

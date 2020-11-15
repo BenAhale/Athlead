@@ -13,10 +13,13 @@
   li {
     display: inline-block;
   }
-}
-
-.card-body {
-  padding-right: 0px;
+  .card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 130px;
+    padding-right: 0px;
+  }
 }
 
 .card-link {
@@ -32,13 +35,6 @@
   height: 130px;
   width: 130px;
   border-radius: 10px 0px 0px 10px;
-}
-
-.card-body {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-left: 130px;
 }
 
 .stat-title {

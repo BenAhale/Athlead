@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   def home
     @athletes = User.athlete
     if current_user.athlete?
-      redirect_to athlete_path(current_athlete)
+      redirect_to athlete_path(current_user)
     elsif current_user.scout?
       render 'athletes'
     end
@@ -26,6 +26,14 @@ class PagesController < ApplicationController
     elsif current_user.scout?
       @school = School.new
       @address = @school.build_address
+    end
+  end
+
+  def offers
+    if current_user.scout?
+      @offers = current_user.sent_offers
+    elsif current_user.athlete?
+      @offers = current_user.received_offers
     end
   end
 end

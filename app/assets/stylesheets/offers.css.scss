@@ -1,0 +1,23 @@
+.offer-card {
+  color: white;
+  background-color: #444;
+  .card-title {
+    font-weight: 600;
+    font-size: 30px;
+  }
+  h6 {
+    color: #dfdfdf;
+  }
+  .view-button {
+    color: white;
+  }
+
+  .delete-button {
+    color: black;
+  }
+}
+
+.card-container {
+  display: flex;
+  justify-content: space-around;
+}
