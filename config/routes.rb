@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :videos
   resources :statistics
   get '/offers', to: 'pages#offers', as: 'offers'
-  resources :offers, only: [:create, :destroy]
+  resources :offers, only: [:create, :destroy, :update]
   get 'schools/new'
   get 'schools/create'
   devise_for :users, controllers: { registrations: "users/registrations" }

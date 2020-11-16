@@ -1,0 +1,19 @@
+<%= form_with(model: offer, local: true) do |form| %>
+  <% if offer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(offer.errors.count, "error") %> prohibited this offer from being saved:</h2>
+
+      <ul>
+        <% offer.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :status, :value => "declined" %>
+
+  <div class="actions">
+    <%= form.submit "Decline", class: "btn btn-danger" %>
+  </div>
+<% end %>

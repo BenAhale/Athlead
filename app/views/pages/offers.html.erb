@@ -2,16 +2,22 @@
   <% if current_user.athlete? %>
     <% @offers.each do |offer| %>
       <div class="card offer-card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title"><%= offer.scout.school.name %></h5>
-            <h6 class="card-subtitle mb-2"><%= time_ago_in_words(offer.created_at) %> ago</h6>
-            <p class="card-text">Division: <%= offer.scout.school.division.to_s %></p>
-            <p class="card-text">Scout: <%= offer.scout.name %></p>
-            <button class="btn btn-success"><%= link_to 'Accept', athlete_path(offer.athlete), class: "accept-button" %></button>
-            <button class="btn btn-warning"><%= link_to 'Decline', offer, method: :delete, class: "decline-button" %></button>
-            <a href="#" class="card-link"></a>
-          </div>
+        <div class="card-body">
+          <h5 class="card-title"><%= offer.scout.school.name %></h5>
+          <h6 class="card-subtitle mb-2"><%= time_ago_in_words(offer.created_at) %> ago</h6>
+          <p class="card-text">Division: <%= offer.scout.school.division.to_s %></p>
+          <p class="card-text">Scout: <%= offer.scout.name %></p>
+          <p class="card-text">Status: <%= offer.status.capitalize %></p>
+          <% if offer.accepted? %>
+            <button type="button" class="btn btn-success" disabled>Committed</button>
+          <% elsif offer.declined? %>
+            <button type="button" class="btn btn-warning" disabled>Declined</button>
+          <% else %>
+            <%= render 'shared/acceptoffer', offer: offer %>
+            <%= render 'shared/declineoffer', offer: offer %>
+          <% end %>
         </div>
+      </div>
     <% end %>
   <% elsif current_user.scout? %>
     <% @offers.each do |offer| %>
@@ -22,10 +28,15 @@
             <h6 class="card-subtitle mb-2"><%= time_ago_in_words(offer.created_at) %> ago</h6>
             <p class="card-text">Position: <%= offer.athlete.statistic.position %></p>
             <p class="card-text">Class: <%= %></p>
-            <p class="card-text">Status: <%= %></p>
+            <p class="card-text">Status: <%= offer.status.capitalize %></p>
             <button class="btn btn-primary"><%= link_to 'View', athlete_path(offer.athlete), class: "view-button" %></button>
-            <button class="btn btn-warning"><%= link_to 'Delete Offer', offer, method: :delete, class: "delete-button" %></button>
-            <a href="#" class="card-link"></a>
+            <% if offer.accepted? %>
+              <button type="button" class="btn btn-success" disabled>Committed</button>
+            <% elsif offer.declined? %>
+              <button type="button" class="btn btn-warning" disabled>Declined</button>
+            <% else %>
+              <button class="btn btn-danger"><%= link_to 'Delete Offer', offer, method: :delete, class: "delete-button" %></button>
+            <% end %>
           </div>
         </div>
       </a>

@@ -45,15 +45,26 @@
   <div class="scout-options">
       <button class="btn btn-primary">Message</button>
         <% offer_found = false %>
+        <% athlete_committed = false %>
         <% @athlete.received_offers.each do |offer| %>
+          <% athlete_committed = true if offer.accepted? %>
           <% if offer.scout.id == current_user.id %>
             <% offer_found = true %>
-            <button class="btn btn-warning"><%= link_to 'Delete Offer', offer, method: :delete %></button>
+            <% if offer.accepted? %>
+              <button type="button" class="btn btn-success" disabled>Committed</button>
+            <% elsif offer.declined? %>
+              <button type="button" class="btn btn-warning" disabled>Declined</button>
+            <% else %>
+              <button class="btn btn-danger"><%= link_to 'Delete Offer', offer, method: :delete %></button>
+            <% end %>
             <% break %>
           <% end %>
         <% end %>
-        <% unless offer_found %>
+        <% unless offer_found || athlete_committed %>
           <%= render 'shared/offerform', offer: @offer, athlete: @athlete %>
+        <% end %>
+        <% if athlete_committed %>
+          <button type="button" class="btn btn-warning" disabled>Committed</button>
         <% end %>
     </div>
   <section class="athlete-videos">

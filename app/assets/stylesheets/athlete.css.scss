@@ -133,6 +133,7 @@ table th:last-child{
 .videos-container {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 .video-card {
   width: 400px;
