@@ -18,12 +18,12 @@
   </div>
 
   <div class="field form-group">
-    <%= form.label :height %>
+    <%= form.label :height, "Height (CM)" %>
     <%= form.number_field :height, min: 100, max: 250, class: "form-control" %>
   </div>
 
   <div class="field form-group">
-    <%= form.label :weight %>
+    <%= form.label :weight, "Weight (KG)" %>
     <%= form.number_field :weight, min: 40, max: 250, class: "form-control" %>
   </div>
   
@@ -55,6 +55,6 @@
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Save", class: "btn btn-primary" %>
   </div>
 <% end %>

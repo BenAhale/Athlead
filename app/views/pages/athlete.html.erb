@@ -72,6 +72,11 @@
           <button type="button" class="btn btn-light" disabled><%= athlete_school %></button>
         <% end %>
       </div>
+    <% elsif current_user.id == @athlete.id %>
+      <div class="athlete-options">
+        <%= link_to "Edit Account", edit_user_registration_path(@athlete), class: "btn btn-primary" %>
+        <%= link_to "Edit Profile", edit_statistic_path(@athlete.statistic), class: "btn btn-info"%>
+      </div>
     <% end %>
     <section class="athlete-videos">
       <h1>Videos & Highlights</h1>
