@@ -15,7 +15,7 @@ class ConversationsController < ApplicationController
   # POST /conversations
   # POST /conversations.json
   def create
-    @conversation = Conversation.new(conversation_params)
+    @conversation = Conversation.new(scout_id: current_user.id, athlete_id: conversation_params[:athlete_id])
 
     respond_to do |format|
       if @conversation.save

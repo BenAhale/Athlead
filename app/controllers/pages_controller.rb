@@ -25,6 +25,7 @@ class PagesController < ApplicationController
   def athlete
     @athlete = User.find(params[:id])
     @offer = Offer.new
+    @conversation = Conversation.new
   end
 
   def complete

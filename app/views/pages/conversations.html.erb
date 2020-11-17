@@ -3,9 +3,29 @@
   <% unless @conversations.empty? %>
     <% if current_user.athlete? %>
       <% @conversations.each do |conversation| %>
-        <%= image_tag conversation.scout.avatar %>
-        <h1><%= conversation.scout.name %></h1>
-      <% end %>
+        <a href="<%= conversation_path(conversation) %>" class="conversation-link">
+          <div class="card conversation-card mb-3" style="max-width: 700px;">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <%= image_tag conversation.scout.avatar, class: "card-img conversations-img" %>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body convo-card-body">
+                  <h5 class="card-title"><%= conversation.scout.name %></h5>
+                  <% if conversation.messages.present? %>
+                    <% last_msg = conversation.messages.last.content %>
+                    <% last_msg.length > 70 ? msg = ": " + last_msg[0..70] + " ...." : msg = ": " + last_msg %>
+                    <p class="card-text"><%= conversation.messages.last.user.name + msg %></p>
+                    <p class="card-text"><small class="text-muted"><%= time_ago_in_words(conversation.messages.last.created_at) %> ago</small></p>
+                  <% else %>
+                    <p class="card-text">This is a new conversation. There's no messages yet!</p>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      <% end%>
     <% elsif current_user.scout? %>
       <% @conversations.each do |conversation| %>
         <a href="<%= conversation_path(conversation) %>" class="conversation-link">
@@ -17,10 +37,14 @@
               <div class="col-md-8">
                 <div class="card-body convo-card-body">
                   <h5 class="card-title"><%= conversation.athlete.name %></h5>
-                  <% last_msg = conversation.messages.last.content %>
-                  <% last_msg.length > 100 ? msg = ": " + last_msg[0..100] + " ...." : msg = ": " + last_msg %>
-                  <p class="card-text"><%= conversation.messages.last.user.name + msg %></p>
-                  <p class="card-text"><small class="text-muted"><%= time_ago_in_words(conversation.messages.last.created_at) %> ago</small></p>
+                  <% if conversation.messages.present? %>
+                    <% last_msg = conversation.messages.last.content %>
+                    <% last_msg.length > 70 ? msg = ": " + last_msg[0..70] + " ...." : msg = ": " + last_msg %>
+                    <p class="card-text"><%= conversation.messages.last.user.name + msg %></p>
+                    <p class="card-text"><small class="text-muted"><%= time_ago_in_words(conversation.messages.last.created_at) %> ago</small></p>
+                  <% else %>
+                    <p class="card-text">This is a new conversation. There's no messages yet!</p>
+                  <% end %>
                 </div>
               </div>
             </div>

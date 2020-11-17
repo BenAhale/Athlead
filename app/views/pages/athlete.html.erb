@@ -44,7 +44,7 @@
   <% end %>
   <% if current_user.scout? %>
     <div class="scout-options">
-      <button class="btn btn-primary">Message</button>
+      <%= render 'shared/conversationform', conversation: @conversation, athlete_id: @athlete.id%>
       <% offer_found = false %>
       <% athlete_committed = false %>
       <% athlete_school = false %>

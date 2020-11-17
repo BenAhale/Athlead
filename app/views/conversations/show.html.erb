@@ -6,7 +6,6 @@
     <% elsif current_user.athlete? %>
       <%= image_tag @conversation.scout.avatar %>
       <h1><%= @conversation.scout.name %></h1>
-      <h4><%= @conversation.scout.school.name %> | Divison <%= @conversation.scout.school.division.to_s %></h4>
     <% end %>
   </div>
   <div class="conversation-body">

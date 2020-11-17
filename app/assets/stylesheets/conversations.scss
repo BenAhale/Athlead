@@ -8,14 +8,15 @@
 }
 
 .conversation-card {
-  min-width: 600px;
+  display: block;
   background-color: #444;
   color: white;
+  min-width: 600px;
+  margin: 0 auto;
 }
 
 .conversation-container {
-  display: flex;
-  justify-content: center;
+  width: 100%;
 }
 
 .convo-card-body {
@@ -84,8 +85,16 @@
     }
     .received-message {
       float: left;
-      background-color: #666;
+      background-color: grey;
       clear: both;
+      margin-bottom: 15px;
+      padding: 15px;
+      font-size: 20px;
+      border-radius: 20px;
+      p {
+        margin: 0;
+        text-align: right;
+      }
     }
   }
   .conversation-message {
