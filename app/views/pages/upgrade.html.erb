@@ -1,5 +1,19 @@
-<button data-stripe='payment'>Upgrade Account $30</button>
-
+<div class="premium-container">
+  <h1>Upgrade to Premium</h1>
+  <h5>If you're looking to get the full Athlead experience, upgrade to premium! Upgrading gives you access to the following:</h5>
+  <ul>
+    <% if current_user.scout? %>
+      <li>Filter athletesto allow for more tailored results</li>
+      <li>Message athletes to discuss a potential scholarship offer</li>
+      <li>Offer scholarships</li>
+    <% elsif current_user.athlete? %>
+      <li>Stand out in searches with a different background colour</li>
+      <li>Add an unlimited number of videos to your profile</li>
+      <li>Appear above free athletes in search results</li>
+    <% end %>
+  </ul>
+  <button data-stripe='payment' class="btn btn-primary upgrade-btn">Upgrade to Premium - $30</button>
+</div>
 <script src="https://js.stripe.com/v3/"></script>
 <script>
   document.querySelector("[data-stripe='payment']").addEventListener("click", () => {

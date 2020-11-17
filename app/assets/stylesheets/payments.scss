@@ -1,3 +1,32 @@
 // Place all the styles related to the payments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.premium-container {
+  padding: 30px;
+  background-color: #444;
+  border-radius: 10px;
+  color: white;
+  width: 80%;
+  margin:0 auto;
+  text-align: center;
+  h1 {
+    font-size: 40px;
+    margin-bottom: 30px;
+  }
+  h5 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  ul {
+    font-size: 23px;
+    text-decoration: none;
+    margin-bottom: 40px;
+  }
+  li {
+    list-style-type: none;
+  }
+  .upgrade-btn {
+    font-size: 20px;
+  }
+}

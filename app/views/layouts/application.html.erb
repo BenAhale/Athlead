@@ -5,6 +5,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <script src="https://kit.fontawesome.com/f34d1d1032.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500&display=swap" rel="stylesheet">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -35,9 +36,15 @@
             <%= current_user.name %>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <%= link_to 'Messages', conversations_path, class: "dropdown-item" %>
-              <%= link_to 'Offers', offers_path, class: "dropdown-item" %>
-              <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+              <%= link_to '<i class="fas fa-star"></i> Premium'.html_safe, upgrade_path, class: "dropdown-item"%>
+              <% if current_user.scout? %>
+                <%= link_to '<i class="fas fa-users"></i> Athletes'.html_safe, root_url, class: "dropdown-item" %>
+              <% elsif current_user.athlete? %>
+                <%= link_to '<i class="fas fa-user"></i> Profile'.html_safe, root_url, class: "dropdown-item" %>
+              <% end %>
+              <%= link_to '<i class="fas fa-envelope"></i> Messages'.html_safe, conversations_path, class: "dropdown-item" %>
+              <%= link_to '<i class="fas fa-graduation-cap"></i> Offers'.html_safe, offers_path, class: "dropdown-item" %>
+              <%= link_to '<i class="fas fa-sign-out-alt"></i> Sign Out'.html_safe, destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           <% else %>
               <%= link_to 'Sign In', new_user_session_path, class: "dropdown-item" %>
               <%= link_to 'Sign Up', new_user_registration_path, class: "dropdown-item" %>

@@ -62,8 +62,8 @@ class PagesController < ApplicationController
           user_id: current_user.id
         }
       },
-      success_url: "#{root_url}/payments/success?userId=#{current_user.id}",
-      cancel_url: "#{root_url}/upgrade"
+      success_url: "#{root_url}payments/success",
+      cancel_url: "#{root_url}upgrade"
     )
     @session_id = session.id
   end

@@ -1,2 +1,16 @@
-<h1>Payments#success</h1>
-<p>Find me in app/views/payments/success.html.erb</p>
+<div class="premium-container">
+  <h1>Success! You're officially a Premium user!</h1>
+  <h5>You now have full access to the site, which means you can:</p>
+  <ul>
+    <% if current_user.scout? %>
+      <li>Filter search results</li>
+      <li>Message athletes</li>
+      <li>Offer scholarships</li>
+    <% elsif current_user.athlete? %>
+      <li>Stand out in searches with a different background colour</li>
+      <li>Add unlimited videos to your profile</li>
+      <li>Appear above free users in scout searches</li>
+    <% end %>
+  </ul>
+  <%= link_to 'Back', root_url, class:'btn btn-primary' %>
+</div>
