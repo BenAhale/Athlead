@@ -1,3 +1,54 @@
+<button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">Filters</button><br><br>
+
+<div id="collapse" class="collapse">
+  <%= form_with(scope: :search, url: athletes_path, method: 'get', local: true, class: "form-inline my-2 my-lg-0") do |f| %>
+    <div class="filter-group">
+      <h2>Name</h2>
+      <%= f.text_field :name, class: "form-control mr-sm-2", placeholder: "Search" %>
+    </div>
+    <div class="filter-group">
+      <h2>Position</h2>
+      <%= f.select :position, options_for_select(["Point Guard", "Shooting Guard", "Small Forward", "Power Forward", "Center"]), {:include_blank => true }, {:class => "form-control"} %>
+    </div>
+    <%= f.fields_for :height do |hf| %>
+      <div class="filter-group">
+        <h2>Height</h2>
+        <%= hf.number_field :min, placeholder: "Min.", class: "form-control filter-input" %>
+        <%= hf.number_field :max, placeholder: "Max.", class: "form-control filter-input" %>
+      </div>
+    <% end %>
+    <div class="filter-group">
+      <%= f.fields_for :weight do |wf| %>
+        <h2>Weight</h2>
+        <%= wf.number_field :min, placeholder: "Min.", class: "form-control filter-input" %>
+        <%= wf.number_field :max, placeholder: "Max.", class: "form-control filter-input" %>
+      <% end %>
+    </div>
+    <div class="filter-group">
+      <%= f.fields_for :points do |pf| %>
+        <h2>Points</h2>
+        <%= pf.number_field :min, placeholder: "Min.", class: "form-control filter-input" %>
+        <%= pf.number_field :max, placeholder: "Max.", class: "form-control filter-input" %>
+      <% end %>
+    </div>
+    <div class="filter-group">
+      <%= f.fields_for :rebounds do |rf| %>
+        <h2>Rebounds</h2>
+        <%= rf.number_field :min, placeholder: "Min.", class: "form-control filter-input" %>
+        <%= rf.number_field :max, placeholder: "Max.", class: "form-control filter-input" %>
+      <% end %>
+    </div>
+    <div class="filter-group">
+      <%= f.fields_for :assists do |af| %>
+        <h2>Assists</h2>
+        <%= af.number_field :min, placeholder: "Min.", class: "form-control filter-input" %>
+        <%= af.number_field :max, placeholder: "Max.", class: "form-control filter-input" %>
+      <% end %>
+    </div>
+    <%= f.submit "Search", class: "btn btn-outline-primary my-2 my-sm-0" %>
+  <% end %>
+</div>
+
 <% @athletes.each do |athlete| %>
 <% next if athlete.statistic.nil? %>
 <a class="card-link" href="<%= athlete_path(athlete) %>">

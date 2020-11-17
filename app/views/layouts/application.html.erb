@@ -16,10 +16,10 @@
     <nav class="navbar">
       <div class="search-bar">
         <%# <% if current_user.scout? %>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-          </form>
+        <%= form_with(scope: :search, url: athletes_path, method: 'get', local: true, class: "form-inline my-2 my-lg-0") do |f| %>
+          <%= f.text_field :name, class: "form-control mr-sm-2", placeholder: "Search" %>
+          <%= f.submit "Search", class: "btn btn-outline-primary my-2 my-sm-0" %>
+        <% end %>
         <%# <% end  %>
       </div>
 

@@ -19,7 +19,23 @@ class PagesController < ApplicationController
   end
 
   def athletes
-    @athletes = User.athlete
+    if params[:search].present?
+      @athletes = User.athlete.where(nil)
+      @athletes = (User.athlete).search_by_name(params[:search][:name]) if params[:search][:name].present?
+      @athletes = @athletes.filter_by_position(params[:search][:position]) if params[:search][:position].present?
+      @athletes = @athletes.filter_min_height(params[:search][:height][:min]) if params[:search][:height][:min].present?
+      @athletes = @athletes.filter_max_height(params[:search][:height][:max]) if params[:search][:height][:max].present?
+      @athletes = @athletes.filter_min_weight(params[:search][:weight][:min]) if params[:search][:weight][:min].present?
+      @athletes = @athletes.filter_max_weight(params[:search][:weight][:max]) if params[:search][:weight][:max].present?
+      @athletes = @athletes.filter_min_points(params[:search][:points][:min]) if params[:search][:points][:min].present?
+      @athletes = @athletes.filter_max_points(params[:search][:points][:max]) if params[:search][:points][:max].present?
+      @athletes = @athletes.filter_min_rebounds(params[:search][:rebounds][:min]) if params[:search][:rebounds][:min].present?
+      @athletes = @athletes.filter_max_rebounds(params[:search][:rebounds][:max]) if params[:search][:rebounds][:max].present?
+      @athletes = @athletes.filter_min_assists(params[:search][:assists][:min]) if params[:search][:assists][:min].present?
+      @athletes = @athletes.filter_max_assists(params[:search][:assists][:max]) if params[:search][:assists][:max].present?
+    else
+      @athletes = User.athlete
+    end
   end
 
   def athlete

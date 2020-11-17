@@ -78,3 +78,24 @@
 .sml-height {
   font-size: 17px;
 }
+
+.filter-input {
+  width: 70px !important;
+}
+
+.filter-group {
+  margin-right: 20px;
+  margin-bottom: 10px;
+  h2 {
+    font-size: 20px;
+    text-align: center;
+  }
+}
+
+#collapse {
+  color: white;
+  background-color: #444;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 40px;
+}
