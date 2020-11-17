@@ -2,7 +2,7 @@
   position: fixed;
   width: 100%;
   margin-top: -20px;
-  background-color: #383838;
+  background-color: #444;
   border-bottom: 0.5px solid #555;
   z-index: 100;
 }
@@ -30,5 +30,18 @@
       position: relative;
       top: 3px;
     }
+  }
+}
+
+.dropdown-menu {
+  background-color: #555;
+  width: 270px;
+  color: white;
+  .dropdown-item {
+    color: white;
+    font-size: 20px;
+  }
+  .dropdown-item:hover {
+    color: black;
   }
 }

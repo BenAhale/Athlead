@@ -76,7 +76,7 @@
     <section class="athlete-videos">
       <h1>Videos & Highlights</h1>
       <% if current_user.id == @athlete.id %>
-        <%= link_to "New Video", new_video_path %><br><br>
+        <%= link_to "New Video", new_video_path, class: "btn btn-primary" %><br><br>
       <% end %>
       <div class="videos-container">
       <% unless @athlete.videos.nil? %>
@@ -89,7 +89,7 @@
           <% end %>
             <iframe width="100%" height="250" src="https://www.youtube.com/embed/<%= split_link.last %>"></iframe>
             <% if current_user.id == @athlete.id %>
-              <%= link_to 'Delete Video', video_path(video), method: :delete %>
+              <%= link_to 'Delete Video', video_path(video), method: :delete, class: "btn btn-primary" %>
             <% end %>
           </div>
         <% end %>
