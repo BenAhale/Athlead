@@ -1,4 +1,5 @@
 <% @athletes.each do |athlete| %>
+<% next if athlete.statistic.nil? %>
 <a class="card-link" href="<%= athlete_path(athlete) %>">
   <div class="card athletes-card">
     <% if athlete.avatar.attachment.present? %>

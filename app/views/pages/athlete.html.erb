@@ -1,99 +1,103 @@
 <%= link_to 'Back', athletes_path if current_user.scout? %>
-<div class="profile-container">
-  <div class="profile-name">
-    <% athlete_name = @athlete.name.split %>
-    <h2><%= athlete_name.first %></h2>
-    <h1><%= athlete_name.second %></h1>
+<% unless @athlete.statistic.nil? %>
+  <div class="profile-container">
+    <div class="profile-name">
+      <% athlete_name = @athlete.name.split %>
+      <h2><%= athlete_name.first %></h2>
+      <h1><%= athlete_name.second %></h1>
+    </div>
+    <% if !@athlete.avatar.attachment.nil? %>
+      <%= image_tag @athlete.avatar, class: "athlete-img" %>
+    <% else %>
+      <%= image_tag 'Default-User', class: "athlete-img" %>
+    <% end %>
+    <% unless @athlete.statistic.nil? %>
+      <div class="athlete-height">
+        <h3>HEIGHT</h3>
+        <% split_height = ((@athlete.statistic.height / 30.48).round(1)).to_s.split(".") %>
+        <h4><%= split_height.first %><span class="small-height">ft</span><%= split_height.second %><span class="small-height">in</span></h4>
+        <h5>/ <%= @athlete.statistic.height.to_s %><span class="small-height"> cm</span></h5>
+      </div>
+      <div class="athlete-weight">
+        <h3>WEIGHT</h3>
+        <h4><%= (@athlete.statistic.weight * 2.205).to_i.to_s %><span class="small-height"> lbs</span></h4>
+        <h5>/ <%= @athlete.statistic.weight %><span class="small-height"> kg</span></h5>
+      </div>
+      <h5 class="position-title">POSITION</h5>
+      <h3 class="athlete-position"><%= @athlete.statistic.position.upcase %></h3>
+      <table class="table table-dark">
+        <tr>
+          <th>POINTS</th>
+          <th>REBOUNDS</th>
+          <th>ASSISTS</th>
+          <th>STEALS</th>
+          <th>BLOCKS</th>
+        </tr>
+        <tr>
+          <td><%= @athlete.statistic.points %></td>
+          <td><%= @athlete.statistic.rebounds %></td>
+          <td><%= @athlete.statistic.assists %></td>
+          <td><%= @athlete.statistic.steals %></td>
+          <td><%= @athlete.statistic.blocks %></td>
+        </tr>
+      </table>
+      <div class="stats-border"></div>
+    <% end %>
+    <% if current_user.scout? %>
+      <div class="scout-options">
+        <%= render 'shared/conversationform', conversation: @conversation, athlete_id: @athlete.id%>
+        <% offer_found = false %>
+        <% athlete_committed = false %>
+        <% athlete_school = false %>
+        <% @athlete.received_offers.each do |offer| %>
+          <% athlete_committed = true if offer.accepted? %>
+          <% athlete_school = offer.scout.school.name %>
+          <% if offer.scout.id == current_user.id %>
+            <% offer_found = true %>
+            <% if offer.accepted? %>
+              <button type="button" class="btn btn-success" disabled>Committed</button>
+            <% elsif offer.declined? %>
+              <button type="button" class="btn btn-warning" disabled>Declined</button>
+            <% else %>
+              <button class="btn btn-danger"><%= link_to 'Delete Offer', offer, method: :delete %></button>
+            <% end %>
+            <% break %>
+          <% end %>
+        <% end %>
+        <% unless offer_found || athlete_committed %>
+          <%= render 'shared/offerform', offer: @offer, athlete: @athlete %>
+        <% end %>
+        <% if athlete_committed %>
+          <button type="button" class="btn btn-warning" disabled>Committed</button><br><br>
+          <button type="button" class="btn btn-light" disabled><%= athlete_school %></button>
+        <% end %>
+      </div>
+    <% end %>
+    <section class="athlete-videos">
+      <h1>Videos & Highlights</h1>
+      <% if current_user.id == @athlete.id %>
+        <%= link_to "New Video", new_video_path %><br><br>
+      <% end %>
+      <div class="videos-container">
+      <% unless @athlete.videos.nil? %>
+        <% @athlete.videos.each do |video| %>
+          <div class="card video-card">
+          <% if video.link.include?("youtube.com") %>
+            <% split_link = video.link.split("?v=") %>
+          <% elsif video.link.include?("youtu.be") %>
+            <% split_link = video.link.split(".be/") %>
+          <% end %>
+            <iframe width="100%" height="250" src="https://www.youtube.com/embed/<%= split_link.last %>"></iframe>
+            <% if current_user.id == @athlete.id %>
+              <%= link_to 'Delete Video', video_path(video), method: :delete %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+      </div>
+    </section>
+    <br><br>
   </div>
-  <% if !@athlete.avatar.attachment.nil? %>
-    <%= image_tag @athlete.avatar, class: "athlete-img" %>
-  <% else %>
-    <%= image_tag 'Default-User', class: "athlete-img" %>
-  <% end %>
-  <% unless @athlete.statistic.nil? %>
-    <div class="athlete-height">
-      <h3>HEIGHT</h3>
-      <% split_height = ((@athlete.statistic.height / 30.48).round(1)).to_s.split(".") %>
-      <h4><%= split_height.first %><span class="small-height">ft</span><%= split_height.second %><span class="small-height">in</span></h4>
-      <h5>/ <%= @athlete.statistic.height.to_s %><span class="small-height"> cm</span></h5>
-    </div>
-    <div class="athlete-weight">
-      <h3>WEIGHT</h3>
-      <h4><%= (@athlete.statistic.weight * 2.205).to_i.to_s %><span class="small-height"> lbs</span></h4>
-      <h5>/ <%= @athlete.statistic.weight %><span class="small-height"> kg</span></h5>
-    </div>
-    <h5 class="position-title">POSITION</h5>
-    <h3 class="athlete-position"><%= @athlete.statistic.position.upcase %></h3>
-    <table class="table table-dark">
-      <tr>
-        <th>POINTS</th>
-        <th>REBOUNDS</th>
-        <th>ASSISTS</th>
-        <th>STEALS</th>
-        <th>BLOCKS</th>
-      </tr>
-      <tr>
-        <td><%= @athlete.statistic.points %></td>
-        <td><%= @athlete.statistic.rebounds %></td>
-        <td><%= @athlete.statistic.assists %></td>
-        <td><%= @athlete.statistic.steals %></td>
-        <td><%= @athlete.statistic.blocks %></td>
-      </tr>
-    </table>
-    <div class="stats-border"></div>
-  <% end %>
-  <% if current_user.scout? %>
-    <div class="scout-options">
-      <%= render 'shared/conversationform', conversation: @conversation, athlete_id: @athlete.id%>
-      <% offer_found = false %>
-      <% athlete_committed = false %>
-      <% athlete_school = false %>
-      <% @athlete.received_offers.each do |offer| %>
-        <% athlete_committed = true if offer.accepted? %>
-        <% athlete_school = offer.scout.school.name %>
-        <% if offer.scout.id == current_user.id %>
-          <% offer_found = true %>
-          <% if offer.accepted? %>
-            <button type="button" class="btn btn-success" disabled>Committed</button>
-          <% elsif offer.declined? %>
-            <button type="button" class="btn btn-warning" disabled>Declined</button>
-          <% else %>
-            <button class="btn btn-danger"><%= link_to 'Delete Offer', offer, method: :delete %></button>
-          <% end %>
-          <% break %>
-        <% end %>
-      <% end %>
-      <% unless offer_found || athlete_committed %>
-        <%= render 'shared/offerform', offer: @offer, athlete: @athlete %>
-      <% end %>
-      <% if athlete_committed %>
-        <button type="button" class="btn btn-warning" disabled>Committed</button><br><br>
-        <button type="button" class="btn btn-light" disabled><%= athlete_school %></button>
-      <% end %>
-    </div>
-  <% end %>
-  <section class="athlete-videos">
-    <h1>Videos & Highlights</h1>
-    <% if current_user.id == @athlete.id %>
-      <%= link_to "New Video", new_video_path %><br><br>
-    <% end %>
-    <div class="videos-container">
-    <% unless @athlete.videos.nil? %>
-      <% @athlete.videos.each do |video| %>
-        <div class="card video-card">
-        <% if video.link.include?("youtube.com") %>
-          <% split_link = video.link.split("?v=") %>
-        <% elsif video.link.include?("youtu.be") %>
-          <% split_link = video.link.split(".be/") %>
-        <% end %>
-          <iframe width="100%" height="250" src="https://www.youtube.com/embed/<%= split_link.last %>"></iframe>
-          <% if current_user.id == @athlete.id %>
-            <%= link_to 'Delete Video', video_path(video), method: :delete %>
-          <% end %>
-        </div>
-      <% end %>
-    <% end %>
-    </div>
-  </section>
-  <br><br>
-</div>
+<% else %>
+  <h1 class="text-white">This profile hasn't been finished yet! Check back soon!</h1>
+<% end %>
