@@ -53,3 +53,7 @@ gem "cancancan", "~> 3.1"
 gem "city-state", "~> 0.1.0"
 
 gem "aws-sdk-s3", "~> 1.84"
+
+gem "stripe", "~> 5.28"
+
+gem "ultrahook", "~> 0.1.5"

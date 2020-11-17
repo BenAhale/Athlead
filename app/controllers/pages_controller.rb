@@ -45,4 +45,26 @@ class PagesController < ApplicationController
       @offers = current_user.received_offers
     end
   end
+
+  def upgrade
+    session = Stripe::Checkout::Session.create(
+      payment_method_types: ['card'],
+      customer_email: current_user.email,
+      line_items: [{
+        name: "Premium Upgrade",
+        description: "Unlock full features and support the app by upgrading to premium!",
+        amount: 3000,
+        currency: 'aud',
+        quantity: '1'
+      }],
+      payment_intent_data: {
+        metadata: {
+          user_id: current_user.id
+        }
+      },
+      success_url: "#{root_url}/payments/success?userId=#{current_user.id}",
+      cancel_url: "#{root_url}/upgrade"
+    )
+    @session_id = session.id
+  end
 end
