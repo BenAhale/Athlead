@@ -1,6 +1,5 @@
 class VideosController < ApplicationController
-  before_action :set_video, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_video, only: [:destroy]
 
   # GET /videos/new
   def new
@@ -22,6 +21,7 @@ class VideosController < ApplicationController
   # DELETE /videos/1
   # DELETE /videos/1.json
   def destroy
+    user_authorised?(@video)
     @video.destroy
     redirect_to athlete_path(current_user)
   end

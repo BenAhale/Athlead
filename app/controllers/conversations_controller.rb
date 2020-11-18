@@ -17,14 +17,12 @@ class ConversationsController < ApplicationController
   def create
     @conversation = Conversation.new(scout_id: current_user.id, athlete_id: conversation_params[:athlete_id])
 
-    respond_to do |format|
-      if @conversation.save
-        format.html { redirect_to @conversation, notice: 'Conversation was successfully created.' }
-        format.json { render :show, status: :created, location: @conversation }
-      else
-        format.html { render :new }
-        format.json { render json: @conversation.errors, status: :unprocessable_entity }
-      end
+    if @conversation.save
+      format.html { redirect_to @conversation, notice: 'Conversation was successfully created.' }
+      format.json { render :show, status: :created, location: @conversation }
+    else
+      format.html { render :new }
+      format.json { render json: @conversation.errors, status: :unprocessable_entity }
     end
   end
 

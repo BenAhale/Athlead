@@ -19,6 +19,7 @@ class PagesController < ApplicationController
   end
 
   def athletes
+    remove_athletes
     if params[:search].present?
       @athletes = User.athlete.where(nil)
       @athletes = (User.athlete).search_by_name(params[:search][:name]) if params[:search][:name].present?
@@ -82,5 +83,10 @@ class PagesController < ApplicationController
       cancel_url: "#{root_url}upgrade"
     )
     @session_id = session.id
+  end
+
+  private
+  def remove_athletes
+    redirect_to root_url if current_user.athlete?
   end
 end
