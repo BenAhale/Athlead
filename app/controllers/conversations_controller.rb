@@ -18,10 +18,9 @@ class ConversationsController < ApplicationController
     @conversation = Conversation.new(scout_id: current_user.id, athlete_id: conversation_params[:athlete_id])
 
     if @conversation.save
-      format.html { redirect_to @conversation, notice: 'Conversation was successfully created.' }
-      format.json { render :show, status: :created, location: @conversation }
+      redirect_to @conversation, notice: 'Conversation created' }
     else
-      format.html { render :new }
+      render :new
       format.json { render json: @conversation.errors, status: :unprocessable_entity }
     end
   end
